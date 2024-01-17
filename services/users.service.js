@@ -2,8 +2,8 @@ const bcrypt = require("bcrypt")
 const models = require("../models")
 
 const usersModel = models.usersModel
-var registerRes = {success: false}
-var loginRes = {success: false}
+var registerRes = {success: false, message: ""}
+var loginRes = {success: false, message: "", isAdmin: false}
 
 class UsersService
 {
@@ -23,9 +23,16 @@ class UsersService
         {
             await usersModel.create(newUser)
             registerRes.success = true
+            registerRes.message = "Registration successful"
         }
         catch(err)
         {
+            registerRes.success = false
+            if(err.name == "MongoServerError")
+            {
+                if(err.code == 11000)
+                    registerRes.message = "Username already exists"
+            }
             console.error(err)
         }
         return registerRes
@@ -38,10 +45,20 @@ class UsersService
         {
             const loginInfo = await usersModel.findOne(userName).exec()
             loginRes.success = await this.#decryptPassword(req.body.password, loginInfo.password)
+            if(loginRes.success == true)
+            {
+                loginRes.message = "Login successful"
+                loginRes.isAdmin = loginInfo.is_admin
+            }
+            else
+                loginRes.message = "Incorrect password"
         }
         catch(err)
         {
-            console.log(err)
+            loginRes.success = false
+            if(err.name == "TypeError")
+                loginRes.message = "User not found"
+            console.error(err)
         }
         return loginRes
     }
