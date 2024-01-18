@@ -28,7 +28,7 @@ class UsersController
                     if(err)
                         next(err)
                 })
-                req.session.user = {username: req.body.userID, admin: result.isAdmin}
+                req.session.user = {username: req.body.user_id, admin: result.isAdmin}
                 req.session.save((err) => {
                     if(err)
                         next(err)
@@ -49,12 +49,21 @@ class UsersController
 
     logout(req, res)
     {
-        req.session.destroy((err) => {
-            if(err)
-                next(err)
-        })
-        console.log(req.session)
-        res.json({success: true})
+        var logoutRes = {success: false}
+        try
+        {
+            req.session.destroy((err) => {
+                if(err)
+                    next(err)
+            })
+            logoutRes.success = true
+        }
+        catch(err)
+        {
+            logoutRes.success = false
+            console.error(err)
+        }
+        res.json(logoutRes)
         //redirect to home
     }
 }

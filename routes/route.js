@@ -28,8 +28,8 @@ router.post("/admin/add/books", (req, res) => {
 router.post("/admin/update/book", (req, res) => {
     booksController.updateBookInfo(req, res)
 })
-router.get("/admin/delete/book", (req, res) => {
-    booksController.deleteBook(req, res)
+router.get("/admin/delete/books", (req, res) => {
+    booksController.deleteBooks(req, res)
 })
 router.get("/user/view/requests", (req, res) => {
     requestsController.viewUserRequests(req, res)

@@ -36,7 +36,6 @@ class BooksController
         {
             if(req.session.user && req.session.user.admin)
             {
-                console.log(req.body)
                 const result = await booksService.addBooks(req)
                 res.json(result)
             }
@@ -67,13 +66,13 @@ class BooksController
         }
     }
 
-    async deleteBook(req, res)
+    async deleteBooks(req, res)
     {
         try
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = await booksService.deleteBook(req)
+                const result = await booksService.deleteBooks(req)
                 res.json(result)
             }
             /*else

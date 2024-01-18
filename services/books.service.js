@@ -1,17 +1,20 @@
 const models = require("../models")
+const booksData = require("../data/books.json")
 
 const booksModel = models.booksModel
-var addBooksRes = {success: false, message: ""}
-var updateBookInfoRes = {success: false, message: ""}
-var deleteBookRes = {success: false, message: ""}
 
 class BooksService
 {
+    constructor()
+    {
+        this.#populateBooks()
+    }
+
     async getAllBooks(req)
     {
         try
         {
-            const books = await booksModel.find({}).select(["book_id", "title", "author"]).exec()
+            const books = await booksModel.find({}).select(["book_id", "title", "author", "cover"]).exec()
             return books
         }
         catch(err)
@@ -22,9 +25,9 @@ class BooksService
 
     async viewBookInfo(req)
     {
-        const bookID = {book_id: req.body.bookID}
         try
         {
+            const bookID = {book_id: req.body.bookID}
             const bookInfo = await booksModel.findOne(bookID).exec()
             return bookInfo
         }
@@ -36,17 +39,23 @@ class BooksService
 
     async addBooks(req)
     {
-        const newBooks = req.body.data
+        const addBooksRes = {success: false, ids: []}
         try
         {
+            var newBooks = req.body.data
+            for(var i = 0;i < newBooks.length;i++)
+            {
+                const bookCoverBase64 = this.#encodeImage(newBooks[i].cover)
+                newBooks[i].cover = bookCoverBase64
+                addBooksRes.ids.push(newBooks[i].book_id)
+            }
             await booksModel.insertMany(newBooks)
             addBooksRes.success = true
-            addBooksRes.message = "Books added"
         }
         catch(err)
         {
             addBooksRes.success = false
-            addBooksRes.message = "Failed to add books"
+            addBooksRes.ids = []
             console.error(err)
         }
         return addBooksRes
@@ -54,39 +63,75 @@ class BooksService
 
     async updateBookInfo(req)
     {
-        const bookID = {book_id: req.body.bookID}
-        const updatedBookInfo = {title: req.body.bookTitle, author: req.body.bookAuthor, category: req.body.bookCategory, edition: req.body.bookEdition, description: req.body.bookdescription, count: req.body.bookCount}
+        const updateBookRes = {success: false, id: null}
         try
         {
-            await booksModel.updateOne(bookID, updatedBookInfo)
-            updateBookInfoRes.success = true
-            updateBookInfoRes.message = "Book info updated"
+            const bookID = {book_id: req.body.data.book_id}
+            const bookCoverBase64 = this.#encodeImage(req.body.data.cover)
+            const updatedBookInfo = {title: req.body.data.title, author: req.body.data.author, cover: bookCoverBase64, category: req.body.data.category, edition: req.body.data.edition, description: req.body.data.description, count: req.body.data.count}
+            await booksModel.updateOne(bookID, {$set: updatedBookInfo})
+            updateBookRes.success = true
+            updateBookRes.id = bookID.book_id
         }
         catch(err)
         {
-            updateBookInfoRes.success = false
-            updateBookInfoRes.message = "Failed to update book info"
+            updateBookRes.success = false
+            updateBookRes.id = null
             console.error(err)
         }
-        return updateBookInfoRes
+        return updateBookRes
     }
 
-    async deleteBook(req)
+    async deleteBooks(req)
     {
-        const bookID = {book_id: req.body.bookID}
+        const deleteBooksRes = {success: false, ids: []}
         try
         {
-            await booksModel.deleteOne(bookID)
-            deleteBookRes.success = true
-            deleteBookRes.message = "Book deleted"
+            const bookIDs = req.body.data
+            await booksModel.deleteMany({book_id: {$in: bookIDs}})
+            deleteBooksRes.success = true
+            deleteBooksRes.ids = bookIDs
         }
         catch(error)
         {
-            deleteBookRes.success = false
-            deleteBookRes.message = "Failed to delete book"
+            deleteBooksRes.success = false
+            deleteBooksRes.ids = []
             console.error(err)
         }
-        return deleteBookRes
+        return deleteBooksRes
+    }
+
+    async #populateBooks()
+    {
+        try
+        {
+            const booksCount = await booksModel.countDocuments({})
+            if(booksCount == 0)
+            {
+                await booksModel.insertMany(booksData)
+            }
+        }
+        catch(err)
+        {
+            console.error(err)
+        }
+    }
+
+    #encodeImage(coverImage)
+    {
+        try
+        {
+            if(coverImage instanceof File)
+            {
+                console.log(coverImage.buffer.toString("base64"))
+                return coverImage.buffer.toString("base64")
+            }
+            return coverImage
+        }
+        catch(err)
+        {
+            console.error(err)
+        }
     }
 }
 module.exports = new BooksService()

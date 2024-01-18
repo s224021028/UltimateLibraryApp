@@ -2,8 +2,6 @@ const bcrypt = require("bcrypt")
 const models = require("../models")
 
 const usersModel = models.usersModel
-var registerRes = {success: false, message: ""}
-var loginRes = {success: false, message: "", isAdmin: false}
 
 class UsersService
 {
@@ -14,13 +12,14 @@ class UsersService
 
     async register(req)
     {
-        const userID = req.body.userID
-        const password = req.body.password
-        const name = req.body.name
-        const encryptedPassword = await this.#encryptPassword(password)
-        const newUser = {user_id: userID, password: encryptedPassword, name: name}
+        var registerRes = {success: false, message: ""}
         try
         {
+            const userID = req.body.user_id
+            const password = req.body.password
+            const name = req.body.name
+            const encryptedPassword = await this.#encryptPassword(password)
+            const newUser = {user_id: userID, password: encryptedPassword, name: name}
             await usersModel.create(newUser)
             registerRes.success = true
             registerRes.message = "Registration successful"
@@ -40,14 +39,16 @@ class UsersService
 
     async login(req)
     {
-        const userName = {user_id: req.body.userID}
+        var loginRes = {success: false, message: "", id: "", isAdmin: false}
         try
         {
+            const userName = {user_id: req.body.user_id}
             const loginInfo = await usersModel.findOne(userName).exec()
             loginRes.success = await this.#decryptPassword(req.body.password, loginInfo.password)
             if(loginRes.success == true)
             {
                 loginRes.message = "Login successful"
+                loginRes.id = userName.user_id
                 loginRes.isAdmin = loginInfo.is_admin
             }
             else
@@ -56,6 +57,7 @@ class UsersService
         catch(err)
         {
             loginRes.success = false
+            loginRes.id = ""
             if(err.name == "TypeError")
                 loginRes.message = "User not found"
             console.error(err)
