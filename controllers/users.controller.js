@@ -33,7 +33,6 @@ class UsersController
                     if(err)
                         next(err)
                 })
-                console.log(req.session)
                 /*if(req.session.user.admin)
                     redirect to admin home
                 else

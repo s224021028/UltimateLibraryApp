@@ -39,7 +39,7 @@ class BooksService
 
     async addBooks(req)
     {
-        const addBooksRes = {success: false, ids: []}
+        const addBooksRes = {success: false, book_ids: []}
         try
         {
             var newBooks = req.body.data
@@ -47,7 +47,7 @@ class BooksService
             {
                 const bookCoverBase64 = this.#encodeImage(newBooks[i].cover)
                 newBooks[i].cover = bookCoverBase64
-                addBooksRes.ids.push(newBooks[i].book_id)
+                addBooksRes.book_ids.push(newBooks[i].book_id)
             }
             await booksModel.insertMany(newBooks)
             addBooksRes.success = true
@@ -55,7 +55,7 @@ class BooksService
         catch(err)
         {
             addBooksRes.success = false
-            addBooksRes.ids = []
+            addBooksRes.book_ids = []
             console.error(err)
         }
         return addBooksRes
@@ -63,7 +63,7 @@ class BooksService
 
     async updateBookInfo(req)
     {
-        const updateBookRes = {success: false, id: null}
+        const updateBookRes = {success: false, book_id: null}
         try
         {
             const bookID = {book_id: req.body.data.book_id}
@@ -71,12 +71,12 @@ class BooksService
             const updatedBookInfo = {title: req.body.data.title, author: req.body.data.author, cover: bookCoverBase64, category: req.body.data.category, edition: req.body.data.edition, description: req.body.data.description, count: req.body.data.count}
             await booksModel.updateOne(bookID, {$set: updatedBookInfo})
             updateBookRes.success = true
-            updateBookRes.id = bookID.book_id
+            updateBookRes.book_id = bookID.book_id
         }
         catch(err)
         {
             updateBookRes.success = false
-            updateBookRes.id = null
+            updateBookRes.book_id = null
             console.error(err)
         }
         return updateBookRes
@@ -84,18 +84,18 @@ class BooksService
 
     async deleteBooks(req)
     {
-        const deleteBooksRes = {success: false, ids: []}
+        const deleteBooksRes = {success: false, book_ids: []}
         try
         {
             const bookIDs = req.body.data
             await booksModel.deleteMany({book_id: {$in: bookIDs}})
             deleteBooksRes.success = true
-            deleteBooksRes.ids = bookIDs
+            deleteBooksRes.book_ids = bookIDs
         }
         catch(error)
         {
             deleteBooksRes.success = false
-            deleteBooksRes.ids = []
+            deleteBooksRes.book_ids = []
             console.error(err)
         }
         return deleteBooksRes

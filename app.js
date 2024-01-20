@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(session({
     secret: "ula-v-lmp-rk-m-pr",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {maxAge: oneHour}
 }))
 app.use("/", router)
