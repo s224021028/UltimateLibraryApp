@@ -1,9 +1,8 @@
 [
     {
-      "book_id": 1,
       "title": "A Court of Mist and Fury",
       "author": "Sarah J. Maas",
-      "cover": "",
+      "cover": "data/images/ACourtofMistandFury.jpg",
       "description": "Feyre has undergone more trials than one human woman can carry in her heart. Though she's now been granted the powers and lifespan of the High Fae, she is haunted by her time Under the Mountain and the terrible deeds she performed to save the lives of Tamlin and his people.",
       "language": "English",
       "edition":" A Court of Mist and Fury (2014)",
@@ -11,10 +10,9 @@
       "category": "Fantasy"
     },
     {
-        "book_id": 2,
         "title": "1984",
-        "author": " George Orwell",
-        "cover": "",
+        "author": "George Orwell",
+        "cover": "data/images/1984.jpg",
         "description": "Winston Smith toes the Party line, rewriting history to satisfy the demands of the Ministry of Truth. With each lie he writes, Winston grows to hate the Party that seeks power for its own sake and persecutes those who dare to commit thoughtcrimes.",
         "language": "English",
         "edition":"Nineteen Eighty-Four (1949)",
@@ -22,10 +20,9 @@
         "category": "Fantasy"
       },
       {
-        "book_id": 3,
         "title": "percy jackson and the lighting thief",
         "author": "Rick Riordan",
-        "cover": "",
+        "cover": "data/images/percyjacksonandthelightingthief.jpg",
         "description": "After learning that he is the son of a mortal woman and Poseidon, god of the sea, twelve-year-old Percy is sent to a summer camp for demigods like himself, and joins his new friends on a quest to prevent a war between the gods.",
         "language": "English",
         "edition":"Percy Jackson & the Olympians: The Lightning Thief (2005)",
@@ -33,10 +30,9 @@
         "category": "Fantasy"
       },
       {
-        "book_id": 4,
         "title": "Among Us Story 1",
         "author": "Johnny Hotbody",
-        "cover": "",
+        "cover": "data/images/AmongUsStory1.jpg",
         "description": "Some Pig.These are the words in Charlotte's Web, high in the barn. Her spiderweb tells of her feelings for a little pig named Wilbur, as well as her feelings of a little girl named Fern...who loves Wilbur, too.",
         "language": "English",
         "edition":"An edition of Among Us Story 1 (1952)",
@@ -44,10 +40,9 @@
         "category": "Fantasy"
       },
       {
-        "book_id": 5,
         "title": "The enchanted castle",
-        "author": " Edith Nesbit",
-        "cover": "",
+        "author": "Edith Nesbit",
+        "cover": "data/images/Theenchantedcastle.jpg",
         "description": "Four English children find a wonderful world of magic through an enchanted wishing ring.",
         "language": "English",
         "edition":"An edition of The Enchanted Castle (1907)",
@@ -55,10 +50,9 @@
         "category": "Fantasy"
       },
       {
-        "book_id": 11,
         "title": "A wrinkle in time",
-        "author": " Madeleine L'Engle",
-        "cover": "",
+        "author": "Madeleine L'Engle",
+        "cover": "data/images/Awrinkleintime.jpg",
         "description": "A Wrinkle in Time is a science fiction fantasy novel by American writer Madeleine L'Engle, first published in 1962. It is about Meg And Charles Walence. Their father, who was working on a interesting project called a tesseract, goes missing! Then they meet a boy and some strange women. This story won a Newbery Medal, Sequoyah Book Award and Lewis Carroll Shelf Award For this amazing story! It also has a movie! I Hope you all enjoy!",
         "language": "English",
         "edition":"An edition of A Wrinkle in Time (1962)",
@@ -66,10 +60,9 @@
         "category": "Science Fiction"
       },
       {
-        "book_id": 12,
         "title": "La zona morta",
-        "author": "  Stephen King",
-        "cover": "",
+        "author": "Stephen King",
+        "cover": "data/images/Lazonamorta.jpg",
         "description": "The Dead Zone is a science fiction thriller novel by Stephen King published in 1979. The story follows Johnny Smith, who awakens from a coma of nearly five years and, apparently as a result of brain damage, now experiences clairvoyant and precognitive visions triggered by touch.",
         "language": "other",
         "edition":"An edition of The Dead Zone (1979)",
@@ -77,10 +70,9 @@
         "category": "Science Fiction"
       },
       {
-        "book_id": 13,
         "title": "The Purple Cloud",
-        "author": " M. P. Shiel, J. J. Cameron, and Brian Stableford",
-        "cover": "",
+        "author": "M. P. Shiel, J. J. Cameron, and Brian Stableford",
+        "cover": "data/images/ThePurpleCloud.jpg",
         "description": "Published in 1901, M. P. Shiel's The Purple Cloud is an early last man science fiction novel. Foretold by a priest as being against the will of God, Adam Jeffson's Arctic expedition unleashes a terrible fate on the world - a mysterious purple cloud that spreads far into the heavens and across the earth. ",
         "language": "English",
         "edition":"An edition of The Purple Cloud (1901)",
@@ -88,10 +80,9 @@
         "category": "Science Fiction"
       },
       {
-        "book_id": 14,
         "title": "The First Men in the Moon",
-        "author": " H. G. Wells",
-        "cover": "",
+        "author": "H. G. Wells",
+        "cover": "data/images/TheFirstMenintheMoon.jpg",
         "description": "When penniless businessman Mr Bedford retreats to the Kent coast to write a play, he meets by chance the brilliant Dr Cavor, an absent-minded scientist on the brink of developing a material that blocks gravity. ",
         "language": "English",
         "edition":"An edition of The First Men in the Moon (1900)",
@@ -99,10 +90,9 @@
         "category": "Science Fiction"
       },
       {
-        "book_id": 15,
         "title": "The food of the Gods and how it came to earth",
-        "author": " H. G. Wells",
-        "cover": "",
+        "author": "H. G. Wells",
+        "cover": "data/images/ThefoodoftheGodsandhowitcametoearth.jpg",
         "description": "The Food of the Gods and How It Came to Earth is a science fiction novel by H. G. Wells that was first published in 1904.",
         "language": "English",
         "edition":"An edition of The food of the gods and how it came to earth (1900)",
@@ -110,10 +100,9 @@
         "category": "Science Fiction"
       },
       {
-        "book_id": 21,
         "title": "Pet Sematary",
-        "author": " Stephen King ",
-        "cover": "",
+        "author": "Stephen King ",
+        "cover": "data/images/PetSematary.jpg",
         "description": "When Dr. Louis Creed takes a new job and moves his family to the idyllic rural town of Ludlow, Maine, this new beginning seems too good to be true. Despite Ludlow’s tranquility, an undercurrent of danger exists here.",
         "language": "English",
         "edition":"An edition of Pet Sematary (1983)",
@@ -121,10 +110,9 @@
         "category": "Horror"
       },
       {
-        "book_id": 22,
         "title": "Misery",
-        "author": " Stephen King ",
-        "cover": "",
+        "author": "Stephen King ",
+        "cover": "data/images/Misery.jpg",
         "description": "Paul Sheldon. He's a bestselling novelist who has finally met his biggest fan. Her name is Annie Wilkes and she is more than a rabid reader—she is Paul's nurse, tending his shattered body after an automobile accident.",
         "language": "English",
         "edition":"An edition of Misery (1978)",
@@ -132,10 +120,9 @@
         "category": "Horror"
       },
       {
-        "book_id": 23,
         "title": "It",
         "author": " Stephen King ",
-        "cover": "",
+        "cover": "data/images/It.jpg",
         "description": "It began for the Losers on a day in June of 1958, the day school let out for the summer. That was the day Henry Bowers carved the first letter of his name on Ben Hanscom's belly and chased him into the Barrens",
         "language": "English",
         "edition":"An edition of It (1986)",
@@ -143,10 +130,9 @@
         "category": "Horror"
       },
       {
-        "book_id": 24,
         "title": "The New Annotated Dracula",
         "author": "Bram Stoker",
-        "cover": "",
+        "cover": "data/images/TheNewAnnotatedDracula.jpg",
         "description": "An annotated edition of Bram Stoker's classic novel in which a small group of people, having discovered the double identity of the wealthy Transylvanian nobleman, Count Dracula, vow to rid the world of the evil vampire.",
         "language": "English",
         "edition":"An edition of Dracula (1897)",
@@ -154,10 +140,9 @@
         "category": "Horror"
       },
       {
-        "book_id": 25,
         "title": "The Silver Eyes (Five Nights At Freddy's #1)",
         "author": "Scott Cawthon, Kira Breed-Wrisley,",
-        "cover": "",
+        "cover": "data/images/TheSilverEyes(FiveNightsAtFreddy's#1).jpg",
         "description": "Ten years after the horrific murders at Freddy Fazbear's Pizza that ripped their town apart, Charlie, whose father owned the restaurant, and her childhood friends reunite on the anniversary of the tragedy and find themselves at the old pizza place which had been locked up and abandoned for years.",
         "language": "English",
         "edition":"An edition of The Silver Eyes (Five Nights At Freddy's #1) (2001)",
@@ -165,10 +150,9 @@
         "category": "Horror"
       },
       {
-        "book_id": 31,
         "title": "A room with a view",
-        "author": " E. M. Forster",
-        "cover": "",
+        "author": "E. M. Forster",
+        "cover": "data/images/Aroomwithaview.jpg",
         "description": "Lucy Honeychurch, a young middle-class girl, travels with her spinster cousin, Charlotte Bartlett, to Florence where they are on holiday at an Italian pension set up specifically for vacationers from Great Britain.",
         "language": "English",
         "edition":"An edition of A Room with a View (1908)",
@@ -176,21 +160,19 @@
         "category": "Romance"
       },
       {
-        "book_id": 32,
         "title": "Washington Square",
         "author": "Henry James",
-        "cover": "",
-        "description": "With a new afterword by Michael CunninghamWhat Catherine Sloper lacks in brains and beauty, she makes up for by being "very good." The handsome Morris Townsend would do anything to win her hand-even if it means pretending that he loves the homely ingenue, and cares nothing for her opulent wealth.",
+        "cover": "data/images/WashingtonSquare.jpg",
+        "description": "With a new afterword by Michael CunninghamWhat Catherine Sloper lacks in brains and beauty, she makes up for by being very good. The handsome Morris Townsend would do anything to win her hand-even if it means pretending that he loves the homely ingenue, and cares nothing for her opulent wealth.",
         "language": "English",
         "edition":"An edition of Washington Square (1881)",
         "count":17,
         "category": "Romance"
       },
       {
-        "book_id": 33,
         "title": "Yue shi",
         "author": "Stephenie Meyer",
-        "cover": "",
+        "cover": "data/images/Yueshi.jpg",
         "description": "Beila must choose between her friendship with Yagebu, a werewolf, and her relationship with Aidehua, a vampire, but when Seattle is ravaged by a mysterious string of killings, the three of them need to decide whether their personal lives are more important than the well-being of an entire city.",
         "language": "Chinese",
         "edition":"An edition of Eclipse (2002)",
@@ -198,10 +180,9 @@
         "category": "Romance"
       },
       {
-        "book_id": 34,
         "title": "Bajo la misma estrella",
         "author": "John Green",
-        "cover": "",
+        "cover": "data/images/Bajolamismaestrella.jpg",
         "description": "Despite the tumor-shrinking medical miracle that has bought her a few years, Hazel has never been anything but terminal, her final chapter inscribed upon diagnosis.",
         "language": "English",
         "edition":"An edition of The Fault in Our Stars (2010)",
@@ -209,10 +190,9 @@
         "category": "Romance"
       },
       {
-        "book_id": 35,
         "title": "Red, White & Royal Blue",
-        "author": " Casey McQuiston",
-        "cover": "",
+        "author": "Casey McQuiston",
+        "cover": "data/images/Red,White&RoyalBlue.jpg",
         "description": "What happens when America's First Son falls in love with the Prince of Wales? When his mother became President of the United States, Alex Claremont-Diaz was promptly cast as the American equivalent of a young royal. Handsome, charismatic, genius--his image is pure millennial-marketing gold for the White House. ",
         "language": "English",
         "edition":"An edition of Red, White & Royal Blue (2019)",
@@ -220,10 +200,9 @@
         "category": "Romance"
       },
       {
-        "book_id": 41,
         "title": "As Good As Dead",
-        "author": " Holly Jackson",
-        "cover": "",
+        "author": "Holly Jackson",
+        "cover": "data/images/AsGoodAsDead.jpg",
         "description": "An amazing thriller part of the 3 part series, and the final book. the main character, Pip Fitz-Amobi is about to head to college, but she is still daunted by the results of her previous investigations regarding other crimes (see a good girls guide to murder, and as good as dead).",
         "language": "English",
         "edition":"An edition of As Good As Dead (2021)",
@@ -231,10 +210,9 @@
         "category": "Suspense and Thriller"
       },
       {
-        "book_id": 42,
         "title": "Treasure Island",
         "author": "Robert Louis Stevenson",
-        "cover": "",
+        "cover": "data/images/TreasureIsland.jpg",
         "description": "Traditionally considered a coming-of-age story, Treasure Island is an adventure tale known for its atmosphere, characters and action, and also as a wry commentary on the ambiguity of morality — as seen in Long John Silver — unusual for children's literature then and now.",
         "language": "English",
         "edition":"An edition of Treasure Island (1880)",
@@ -242,10 +220,9 @@
         "category": "Suspense and Thriller"
       },
       {
-        "book_id": 43,
         "title": "Nightmare Abbey ",
-        "author": " Thomas Love Peacock",
-        "cover": "",
+        "author": "Thomas Love Peacock",
+        "cover": "data/images/NightmareAbbey.jpg",
         "description": "Nightmare Abbey, a venerable family-mansion, in a highly picturesque state of semi-dilapidation, pleasantly situated on a strip of dry land between the sea and the fens, at the verge of the county of Lincoln, had the honour to be the seat of Christopher Glowry, Esquire.",
         "language": "English",
         "edition":"An edition of Nightmare Abbey (1818)",
@@ -253,10 +230,9 @@
         "category": "Suspense and Thriller"
       },
       {
-        "book_id": 44,
         "title": "Eye of the needle",
         "author": "Ken Follett",
-        "cover": "",
+        "cover": "data/images/Eyeoftheneedle.jpg",
         "description": "One enemy spy knows the secret of the Allies' greatest deception, a brilliant aristocrat and ruthless assassin-code name: The Needle-who holds the key to the ultimate Nazi victory.",
         "language": "English",
         "edition":"An edition of Storm Island (1978)",
@@ -264,10 +240,9 @@
         "category": "Suspense and Thriller"
       },
       {
-        "book_id": 45,
         "title": "The Haunted and the Haunters",
         "author": "Edward Bulwer Lytton, Baron Lytton",
-        "cover": "",
+        "cover": "data/images/TheHauntedandtheHaunter.jpg",
         "description": "This is a classic ghost story. It will send chills through the reader. Great Book!Please Note: This book is easy to read in true text, not scanned images that can sometimes be difficult to decipher. This eBook has bookmarks at chapter headings and is printable up to two full copies per year.",
         "language": "English",
         "edition":"An edition of The Haunted and the Haunters, Or, The House and the Brain (1859)",
@@ -275,10 +250,9 @@
         "category": "Suspense and Thriller"
       },
       {
-        "book_id": 51,
         "title": "Beloved",
         "author": "Toni Morrison",
-        "cover": "",
+        "cover": "data/images/Beloved.jpg",
         "description": "Toni Morrison--author of Song of Solomon and Tar Baby--is a writer of remarkable powers: her novels, brilliantly acclaimed for their passion, their dazzling language and their lyric and emotional force, combine the unassailable truths of experience and emotion with the vision of legend and imagination. ",
         "language": "English",
         "edition":"An edition of Beloved (1987)",
@@ -286,10 +260,9 @@
         "category": "Fiction"
       },
       {
-        "book_id": 52,
         "title": "All the light we cannot see",
         "author": "Anthony Doerr",
-        "cover": "",
+        "cover": "data/images/Allthelightwecannotsee.jpg",
         "description": "A blind French girl on the run from the German occupation and a German orphan-turned-Resistance tracker struggle with respective beliefs after meeting on the Brittany coast",
         "language": "English",
         "edition":"An edition of All the Light We Cannot See (2014)",
@@ -297,10 +270,9 @@
         "category": "Fiction"
       },
       {
-        "book_id": 53,
         "title": "A Game of Thrones",
         "author": "George R. R. Martin",
-        "cover": "",
+        "cover": "data/images/AGameofThrones.jpg",
         "description": "Here is the first volume in George R. R. Martin’s magnificent cycle of novels that includes A Clash of Kings and A Storm of Swords. As a whole, this series comprises a genuine masterpiece of modern fantasy, bringing together the best the genre has to offer.",
         "language": "English",
         "edition":"An edition of A Game of Thrones (1996)",
@@ -308,10 +280,9 @@
         "category": "Fiction"
       },
       {
-        "book_id": 54,
         "title": "The Hunger Games",
         "author": "Suzanne Collins",
-        "cover": "",
+        "cover": "data/images/TheHungerGames.jpg",
         "description": "In the ruins of a place once known as North America lies the nation of Panem, a shining Capitol surrounded by twelve outlying districts. The Capitol is harsh and cruel and keeps the districts in line by forcing them all to send one boy and one girl between the ages of twelve and eighteen to participate in the annual Hunger Games, a fight to the death on live TV.",
         "language": "English",
         "edition":"An edition of The Hunger Games (2008)",
@@ -319,14 +290,13 @@
         "category": "Fiction"
       },
       {
-        "book_id": 55,
         "title": "Oliver Twist",
         "author": "Charles Dickens",
-        "cover": "",
+        "cover": "data/images/OliverTwist.jpg",
         "description": "ONE OF THE MOST SWIFTLY MOVING AND unified of Charles Dickens's great novels, Oliver Twist is also famous for its re-creation—through the splendidly realized figures of Fagin, Nancy, the Artful Dodger, and the evil Bill Sikes— of the vast London underworld of pickpockets, thieves, prostitutes, and abandoned children.",
         "language": "English",
         "edition":"An edition of Oliver Twist (1838)",
         "count":30,
         "category": "Fiction"
-      },
+      }
 ]    

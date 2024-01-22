@@ -10,7 +10,7 @@ class ReservationsController
         {
             if(req.session.user && !req.session.user.admin)
             {
-                const result = reservationsService.viewUserReservations(req)
+                const result = await reservationsService.viewUserReservations(req)
                 res.json(result)
             }
         }
@@ -26,7 +26,7 @@ class ReservationsController
         {
             if(req.session.user && !req.session.user.admin)
             {
-                const result = reservationsService.makeUserReservation(req)
+                const result = await reservationsService.makeUserReservation(req)
                 res.json(result)
             }
         }
@@ -42,7 +42,7 @@ class ReservationsController
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = reservationsService.viewAdminReservations(req)
+                const result = await reservationsService.viewAdminReservations(req)
                 res.json(result)
             }
         }
@@ -58,7 +58,7 @@ class ReservationsController
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = reservationsService.updateAdminReservation(req)
+                const result = await reservationsService.updateAdminReservation(req)
                 res.json(result)
             }
         }

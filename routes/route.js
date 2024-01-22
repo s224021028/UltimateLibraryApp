@@ -1,5 +1,4 @@
 const express = require("express")
-const multer = require("multer")
 const controllers = require("../controllers")
 
 const router = express.Router()
@@ -8,41 +7,29 @@ const booksController = controllers.booksController
 const requestsController = controllers.requestsController
 const reservationsController = controllers.reservationsController
 
-const storageEngine = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads')
-      },
-      filename: function (req, file, cb) {
-        cb(null, file.originalname)
-      }
-  });
-const upload = multer({
-    storage: storageEngine
+router.get("/", (req, res) => {
+    res.redirect("/home")
 })
-
 router.get("/home", (req, res) => {
     booksController.getAllBooks(req, res)
+})
+router.get("/view/book", (req, res) => {
+    booksController.viewBookInfo(req, res)
 })
 router.post("/user/register", (req, res) => {
     usersController.register(req, res)
 })
-router.get("/user/login", (req, res) => {
+router.get("/login", (req, res) => {
     usersController.login(req, res)
 })
-router.get("/user/logout", (req, res) => {
+router.get("/logout", (req, res) => {
     usersController.logout(req, res)
-})
-router.get("/user/view/book", (req, res) => {
-    booksController.viewBookInfo(req, res)
 })
 router.post("/admin/add/books", (req, res) => {
     booksController.addBooks(req, res)
 })
 router.post("/admin/update/book", (req, res) => {
     booksController.updateBookInfo(req, res)
-})
-router.post("/admin/upload/image", upload.single("image"), (req, res) => {
-    booksController.uploadImage(req, res)
 })
 router.get("/admin/delete/books", (req, res) => {
     booksController.deleteBooks(req, res)

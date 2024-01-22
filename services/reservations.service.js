@@ -1,8 +1,6 @@
-const services = require(".")
 const models = require("../models")
 
 const reservationsModel = models.reservationsModel
-const booksService = services.booksService
 
 class ReservationsService
 {
@@ -22,16 +20,17 @@ class ReservationsService
 
     async makeUserReservation(req)
     {
+        const {updateBookCount} = require("../services").booksService
         const makeReservationRes = {success: false, reservation_id: null, book_id: null}
         try
         {
             const userID = req.session.user.username
             const bookID = req.body.data.book_id
-            const reservations = await requestsModel.countDocuments({})
+            const reservations = await reservationsModel.countDocuments({})
             var reservationID = reservations + 1
             const reservationInfo = {reservation_id: reservationID, user_id: userID, book_id: bookID}
             await reservationsModel.create(reservationInfo)
-            await booksService.updateBookCount(bookID)
+            await updateBookCount(bookID, false)
             makeReservationRes.success = true
             makeReservationRes.reservation_id = reservationID
             makeReservationRes.book_id = bookID
@@ -61,6 +60,7 @@ class ReservationsService
 
     async updateAdminReservation(req)
     {
+        const {updateBookCount} = require("../services").booksService
         const updateReservationRes = {success: false, reservation_id: null}
         try
         {
@@ -71,6 +71,8 @@ class ReservationsService
             {
                 const returnDate = Date.now()
                 updatedReservationInfo.return_date = returnDate
+                const reservedBook = await reservationsModel.find(reservationID).select("book_id")
+                await updateBookCount(reservedBook[0].book_id, true)
             }
             await reservationsModel.updateOne(reservationID, {$set: updatedReservationInfo})
             updateReservationRes.success = true

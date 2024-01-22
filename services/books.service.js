@@ -29,7 +29,7 @@ class BooksService
     {
         try
         {
-            const bookID = {book_id: req.body.bookID}
+            const bookID = {book_id: req.body.book_id}
             const bookInfo = await booksModel.findOne(bookID).exec()
             return bookInfo
         }
@@ -49,8 +49,6 @@ class BooksService
             var newBooks = req.body.data
             for(var i = 0;i < newBooks.length;i++)
             {
-                const bookCoverBase64 = this.#encodeImage(newBooks[i].cover)
-                newBooks[i].cover = bookCoverBase64
                 bookID++
                 newBooks[i].book_id = bookID
                 addBooksRes.book_ids.push(newBooks[i].book_id)
@@ -73,8 +71,7 @@ class BooksService
         try
         {
             const bookID = {book_id: req.body.data.book_id}
-            const bookCoverBase64 = this.#encodeImage(req.body.data.cover)
-            const updatedBookInfo = {title: req.body.data.title, author: req.body.data.author, cover: bookCoverBase64, category: req.body.data.category, edition: req.body.data.edition, description: req.body.data.description, count: req.body.data.count}
+            const updatedBookInfo = {title: req.body.data.title, author: req.body.data.author, cover: req.body.data.cover, category: req.body.data.category, edition: req.body.data.edition, description: req.body.data.description, count: req.body.data.count}
             await booksModel.updateOne(bookID, {$set: updatedBookInfo})
             updateBookRes.success = true
             updateBookRes.book_id = bookID.book_id
@@ -107,14 +104,22 @@ class BooksService
         return deleteBooksRes
     }
 
-    async updateBookCount(bookID)
+    async updateBookCount(book_id, increase)
     {
         try
         {
-            const bookCount = await booksModel.find(bookID).select("count")
-            var updatedBookCount = {count: bookCount - 1}
+            const bookID = {book_id: book_id}
+            var bookCount = await booksModel.find(bookID).select("count")
+            if(increase)
+            {
+                bookCount[0].count++
+            }
+            else
+            {
+                bookCount[0].count--
+            }
+            const updatedBookCount = {count: bookCount[0].count}
             await booksModel.updateOne(bookID, {$set: updatedBookCount})
-            success = true
         }
         catch(err)
         {
