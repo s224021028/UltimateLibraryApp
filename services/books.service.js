@@ -1,5 +1,7 @@
+const fs = require("fs")
+const mime = require("mime-types")
 const models = require("../models")
-const booksData = require("../data/books.json")
+var booksData = require("../data/books.json")
 
 const booksModel = models.booksModel
 
@@ -42,11 +44,15 @@ class BooksService
         const addBooksRes = {success: false, book_ids: []}
         try
         {
+            const booksCount = await booksModel.countDocuments({})
+            var bookID = booksCount
             var newBooks = req.body.data
             for(var i = 0;i < newBooks.length;i++)
             {
                 const bookCoverBase64 = this.#encodeImage(newBooks[i].cover)
                 newBooks[i].cover = bookCoverBase64
+                bookID++
+                newBooks[i].book_id = bookID
                 addBooksRes.book_ids.push(newBooks[i].book_id)
             }
             await booksModel.insertMany(newBooks)
@@ -101,6 +107,21 @@ class BooksService
         return deleteBooksRes
     }
 
+    async updateBookCount(bookID)
+    {
+        try
+        {
+            const bookCount = await booksModel.find(bookID).select("count")
+            var updatedBookCount = {count: bookCount - 1}
+            await booksModel.updateOne(bookID, {$set: updatedBookCount})
+            success = true
+        }
+        catch(err)
+        {
+            console.error(err)
+        }
+    }
+
     async #populateBooks()
     {
         try
@@ -108,6 +129,15 @@ class BooksService
             const booksCount = await booksModel.countDocuments({})
             if(booksCount == 0)
             {
+                var bookID = booksCount
+                for(var i = 0;i < booksData.length;i++)
+                {
+                    bookID++
+                    booksData[i].book_id = bookID
+                    const bookCoverBase64 = this.#encodeImage(booksData[i].cover)
+                    const bookCoverMime = this.#getMimeType(booksData[i].cover)
+                    booksData[i].cover = "data:" + bookCoverMime + ";base64," + bookCoverBase64
+                }
                 await booksModel.insertMany(booksData)
             }
         }
@@ -121,12 +151,21 @@ class BooksService
     {
         try
         {
-            if(coverImage instanceof File)
-            {
-                console.log(coverImage.buffer.toString("base64"))
-                return coverImage.buffer.toString("base64")
-            }
-            return coverImage
+            const coverImageBase64 = fs.readFileSync(coverImage, "base64")
+            return coverImageBase64
+        }
+        catch(err)
+        {
+            console.error(err)
+        }
+    }
+
+    #getMimeType(coverImage)
+    {
+        try
+        {
+            const coverImageMimeType = mime.lookup(coverImage)
+            return coverImageMimeType
         }
         catch(err)
         {

@@ -8,8 +8,11 @@ class ReservationsController
     {
         try
         {
-            const result = reservationsService.viewUserReservations(req)
-            res.json(result)
+            if(req.session.user && !req.session.user.admin)
+            {
+                const result = reservationsService.viewUserReservations(req)
+                res.json(result)
+            }
         }
         catch(err)
         {
@@ -21,8 +24,11 @@ class ReservationsController
     {
         try
         {
-            const result = reservationsService.makeUserReservation(req)
-            res.json(result)
+            if(req.session.user && !req.session.user.admin)
+            {
+                const result = reservationsService.makeUserReservation(req)
+                res.json(result)
+            }
         }
         catch(err)
         {
@@ -34,8 +40,11 @@ class ReservationsController
     {
         try
         {
-            const result = reservationsService.viewAdminReservations(req)
-            res.json(result)
+            if(req.session.user && req.session.user.admin)
+            {
+                const result = reservationsService.viewAdminReservations(req)
+                res.json(result)
+            }
         }
         catch(err)
         {
@@ -47,8 +56,11 @@ class ReservationsController
     {
         try
         {
-            const result = reservationsService.updateAdminReservation(req)
-            res.json(result)
+            if(req.session.user && req.session.user.admin)
+            {
+                const result = reservationsService.updateAdminReservation(req)
+                res.json(result)
+            }
         }
         catch(err)
         {

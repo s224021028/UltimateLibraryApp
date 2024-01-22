@@ -1,4 +1,5 @@
 const express = require("express")
+const multer = require("multer")
 const controllers = require("../controllers")
 
 const router = express.Router()
@@ -7,7 +8,19 @@ const booksController = controllers.booksController
 const requestsController = controllers.requestsController
 const reservationsController = controllers.reservationsController
 
-router.get("/", (req, res) => {
+const storageEngine = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads')
+      },
+      filename: function (req, file, cb) {
+        cb(null, file.originalname)
+      }
+  });
+const upload = multer({
+    storage: storageEngine
+})
+
+router.get("/home", (req, res) => {
     booksController.getAllBooks(req, res)
 })
 router.post("/user/register", (req, res) => {
@@ -27,6 +40,9 @@ router.post("/admin/add/books", (req, res) => {
 })
 router.post("/admin/update/book", (req, res) => {
     booksController.updateBookInfo(req, res)
+})
+router.post("/admin/upload/image", upload.single("image"), (req, res) => {
+    booksController.uploadImage(req, res)
 })
 router.get("/admin/delete/books", (req, res) => {
     booksController.deleteBooks(req, res)

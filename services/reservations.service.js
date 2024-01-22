@@ -1,6 +1,8 @@
+const services = require(".")
 const models = require("../models")
 
 const reservationsModel = models.reservationsModel
+const booksService = services.booksService
 
 class ReservationsService
 {
@@ -28,7 +30,8 @@ class ReservationsService
             const reservations = await requestsModel.countDocuments({})
             var reservationID = reservations + 1
             const reservationInfo = {reservation_id: reservationID, user_id: userID, book_id: bookID}
-            await requestsModel.create(reservationInfo)
+            await reservationsModel.create(reservationInfo)
+            await booksService.updateBookCount(bookID)
             makeReservationRes.success = true
             makeReservationRes.reservation_id = reservationID
             makeReservationRes.book_id = bookID
@@ -69,7 +72,7 @@ class ReservationsService
                 const returnDate = Date.now()
                 updatedReservationInfo.return_date = returnDate
             }
-            await requestsModel.updateOne(reservationID, {$set: updatedReservationInfo})
+            await reservationsModel.updateOne(reservationID, {$set: updatedReservationInfo})
             updateReservationRes.success = true
             updateReservationRes.reservation_id = reservationID
         }

@@ -83,5 +83,21 @@ class BooksController
             console.error(err)
         }
     }
+
+    async uploadImage(req, res)
+    {
+        try
+        {
+            if(req.session.user && req.session.user.admin)
+            {
+                const result = await booksService.uploadImage(req)
+                res.json(result)
+            }
+        }
+        catch(err)
+        {
+            console.error(err)
+        }
+    }
 }
 module.exports = new BooksController()
