@@ -13,8 +13,9 @@ class RequestsController
                 const result = await requestsService.viewUserRequests(req)
                 res.json(result)
             }
-            /*else
-                redirect to user home*/
+            else
+                res.json({success: false, message: "Login required"})
+                //redirect to user home*/
         }
         catch(err)
         {
@@ -31,8 +32,9 @@ class RequestsController
                 const result = await requestsService.makeUserRequest(req)
                 res.json(result)
             }
-            /*else
-                redirect to user home*/
+            else
+                res.json({success: false, message: "Login required"})
+                //redirect to user home*/
         }
         catch(err)
         {
@@ -49,8 +51,9 @@ class RequestsController
                 const result = await requestsService.viewAdminRequests(req)
                 res.json(result)
             }
-            /*else
-                redirect to user home*/
+            else
+                res.json({success: false, message: "Unauthorized"})
+                //redirect to user home*/
         }
         catch(err)
         {
@@ -67,8 +70,9 @@ class RequestsController
                 const result = await requestsService.updateAdminRequest(req)
                 res.json(result)
             }
-            /*else
-                redirect to user home*/
+            else
+                res.json({success: false, message: "Unauthorized"})
+                //redirect to user home*/
         }
         catch(err)
         {

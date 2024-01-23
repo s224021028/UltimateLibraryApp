@@ -39,8 +39,9 @@ class BooksController
                 const result = await booksService.addBooks(req)
                 res.json(result)
             }
-            /*else
-                redirect to user home*/
+            else
+                res.json({success: false, message: "Uaauthorized"})
+                //redirect to user home*/
         }
         catch(err)
         {
@@ -57,8 +58,9 @@ class BooksController
                 const result = await booksService.updateBookInfo(req)
                 res.json(result)
             }
-            /*else
-                redirect to user home*/
+            else
+                res.json({success: false, message: "Unauthorized"})
+                //redirect to user home*/
         }
         catch(err)
         {
@@ -75,24 +77,9 @@ class BooksController
                 const result = await booksService.deleteBooks(req)
                 res.json(result)
             }
-            /*else
-                redirect to user home*/
-        }
-        catch(err)
-        {
-            console.error(err)
-        }
-    }
-
-    async uploadImage(req, res)
-    {
-        try
-        {
-            if(req.session.user && req.session.user.admin)
-            {
-                const result = await booksService.uploadImage(req)
-                res.json(result)
-            }
+            else
+                res.json({success: false, message: "Unauthorized"})
+                //redirect to user home*/
         }
         catch(err)
         {

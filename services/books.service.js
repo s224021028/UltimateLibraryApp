@@ -29,7 +29,7 @@ class BooksService
     {
         try
         {
-            const bookID = {book_id: req.body.book_id}
+            const bookID = {book_id: req.body.data.book_id}
             const bookInfo = await booksModel.findOne(bookID).exec()
             return bookInfo
         }

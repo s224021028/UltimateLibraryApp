@@ -13,6 +13,9 @@ class ReservationsController
                 const result = await reservationsService.viewUserReservations(req)
                 res.json(result)
             }
+            else
+                res.json({success: false, message: "Login required"})
+                //redirect to user home*/
         }
         catch(err)
         {
@@ -29,6 +32,9 @@ class ReservationsController
                 const result = await reservationsService.makeUserReservation(req)
                 res.json(result)
             }
+            else
+                res.json({success: false, message: "Login required"})
+                //redirect to user home*/
         }
         catch(err)
         {
@@ -45,6 +51,9 @@ class ReservationsController
                 const result = await reservationsService.viewAdminReservations(req)
                 res.json(result)
             }
+            else
+                res.json({success: false, message: "Unauthorized"})
+                //redirect to user home*/
         }
         catch(err)
         {
@@ -61,6 +70,9 @@ class ReservationsController
                 const result = await reservationsService.updateAdminReservation(req)
                 res.json(result)
             }
+            else
+                res.json({success: false, message: "Unauthorized"})
+                //redirect to user home*/
         }
         catch(err)
         {
