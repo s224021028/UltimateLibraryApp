@@ -26,14 +26,23 @@ class ReservationsService
         {
             const userID = req.session.user.username
             const bookID = req.body.data.book_id
-            const reservations = await reservationsModel.countDocuments({})
-            var reservationID = reservations + 1
-            const reservationInfo = {reservation_id: reservationID, user_id: userID, book_id: bookID}
-            await reservationsModel.create(reservationInfo)
-            await updateBookCount(bookID, false)
-            makeReservationRes.success = true
-            makeReservationRes.reservation_id = reservationID
-            makeReservationRes.book_id = bookID
+            const res = await updateBookCount(bookID, false)
+            if(res)
+            {
+                const reservations = await reservationsModel.countDocuments({})
+                var reservationID = reservations + 1
+                const reservationInfo = {reservation_id: reservationID, user_id: userID, book_id: bookID}
+                await reservationsModel.create(reservationInfo)
+                makeReservationRes.success = true
+                makeReservationRes.reservation_id = reservationID
+                makeReservationRes.book_id = bookID
+            }
+            else
+            {
+                makeReservationRes.success = false
+                makeReservationRes.reservation_id = null
+                makeReservationRes.book_id = null
+            }
         }
         catch(err)
         {
@@ -72,7 +81,7 @@ class ReservationsService
                 const returnDate = Date.now()
                 updatedReservationInfo.return_date = returnDate
                 const reservedBook = await reservationsModel.find(reservationID).select("book_id")
-                await updateBookCount(reservedBook[0].book_id, true)
+                const res = await updateBookCount(reservedBook[0].book_id, true)
             }
             await reservationsModel.updateOne(reservationID, {$set: updatedReservationInfo})
             updateReservationRes.success = true

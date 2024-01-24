@@ -51,11 +51,14 @@ class UsersController
         var logoutRes = {success: false}
         try
         {
-            req.session.destroy((err) => {
-                if(err)
-                    next(err)
-            })
-            logoutRes.success = true
+            if(req.session)
+            {
+                req.session.destroy((err) => {
+                    if(err)
+                        next(err)
+                })
+                logoutRes.success = true
+            }
         }
         catch(err)
         {

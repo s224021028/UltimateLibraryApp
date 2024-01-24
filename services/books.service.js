@@ -16,7 +16,7 @@ class BooksService
     {
         try
         {
-            const books = await booksModel.find({}).select(["book_id", "title", "author", "cover"]).exec()
+            const books = await booksModel.find({}).select(["book_id", "title", "author", "category", "cover"]).exec()
             return books
         }
         catch(err)
@@ -116,7 +116,10 @@ class BooksService
             }
             else
             {
-                bookCount[0].count--
+                if(bookCount[0].count > 0)
+                    bookCount[0].count--
+                else
+                    return false
             }
             const updatedBookCount = {count: bookCount[0].count}
             await booksModel.updateOne(bookID, {$set: updatedBookCount})
@@ -125,6 +128,7 @@ class BooksService
         {
             console.error(err)
         }
+        return true
     }
 
     async #populateBooks()
