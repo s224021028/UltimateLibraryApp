@@ -1,11 +1,12 @@
 const express = require("express")
 const session = require("express-session")
+const socket = require("./socket")
 require("./db.connection")
 const router = require("./routes/route")
 
 const app = express()
 const http = require("http").createServer(app)
-const io = require("socket.io")(http)
+socket.createSocket(http)
 const oneHour = 3600000
 
 app.use(express.static(__dirname + "/public"))
