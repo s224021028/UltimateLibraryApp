@@ -62,7 +62,7 @@ class RequestsService
             const requestStatus = {status: req.body.data.status}
             await requestsModel.updateOne(requestID, {$set: requestStatus})
             updateRequestRes.success = true
-            updateRequestRes.request_id = requestID
+            updateRequestRes.request_id = requestID.request_id
         }
         catch(err)
         {

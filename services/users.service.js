@@ -30,7 +30,7 @@ class UsersService
             if(err.name == "MongoServerError")
             {
                 if(err.code == 11000)
-                    registerRes.message = "Username already exists"
+                    registerRes.message = "Username exists"
             }
             console.error(err)
         }

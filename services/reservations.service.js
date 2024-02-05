@@ -85,7 +85,7 @@ class ReservationsService
             }
             await reservationsModel.updateOne(reservationID, {$set: updatedReservationInfo})
             updateReservationRes.success = true
-            updateReservationRes.reservation_id = reservationID
+            updateReservationRes.reservation_id = reservationID.reservation_id
         }
         catch(err)
         {
