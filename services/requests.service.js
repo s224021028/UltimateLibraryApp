@@ -55,19 +55,22 @@ class RequestsService
 
     async updateAdminRequest(req)
     {
-        const updateRequestRes = {success: false, request_id: null}
+        const updateRequestRes = {success: false, request_id: null, user_id: null}
         try
         {
             const requestID = {request_id: req.body.data.request_id}
             const requestStatus = {status: req.body.data.status}
             await requestsModel.updateOne(requestID, {$set: requestStatus})
+            const userID = await requestsModel.find(requestID).select("user_id")
             updateRequestRes.success = true
             updateRequestRes.request_id = requestID.request_id
+            updateRequestRes.user_id = userID[0].user_id
         }
         catch(err)
         {
             updateRequestRes.success = false
             updateRequestRes.request_id = null
+            updateRequestRes.user_id = null
             console.error(err)
         }
         return updateRequestRes

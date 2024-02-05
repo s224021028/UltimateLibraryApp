@@ -31,6 +31,8 @@ class ReservationsController
             {
                 const result = await reservationsService.makeUserReservation(req)
                 res.json(result)
+                if(socket.isRoom(req.session.user.username))
+                    socket.sendNotification(req.session.user.username, "new_reservation", "success")
             }
             else
                 res.json({success: false, message: "Login required"})
@@ -69,6 +71,8 @@ class ReservationsController
             {
                 const result = await reservationsService.updateAdminReservation(req)
                 res.json(result)
+                if(socket.isRoom(result.user_id))
+                    socket.sendNotification(result.user_id, "update_reservation", "success")
             }
             else
                 res.json({success: false, message: "Unauthorized"})

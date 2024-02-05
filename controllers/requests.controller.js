@@ -1,4 +1,5 @@
 const services = require("../services")
+const socket = require("../socket")
 
 const requestsService = services.requestsService
 
@@ -31,6 +32,8 @@ class RequestsController
             {
                 const result = await requestsService.makeUserRequest(req)
                 res.json(result)
+                if(socket.isRoom(req.session.user.username))
+                    socket.sendNotification(req.session.user.username, "new_request", "success")
             }
             else
                 res.json({success: false, message: "Login required"})
@@ -69,6 +72,8 @@ class RequestsController
             {
                 const result = await requestsService.updateAdminRequest(req)
                 res.json(result)
+                if(socket.isRoom(result.user_id))
+                    socket.sendNotification(result.user_id, "update_request", "success")
             }
             else
                 res.json({success: false, message: "Unauthorized"})

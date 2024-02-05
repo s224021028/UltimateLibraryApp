@@ -70,7 +70,7 @@ class ReservationsService
     async updateAdminReservation(req)
     {
         const {updateBookCount} = require("../services").booksService
-        const updateReservationRes = {success: false, reservation_id: null}
+        const updateReservationRes = {success: false, reservation_id: null, user_id: null}
         try
         {
             const reservationID = {reservation_id: req.body.data.reservation_id}
@@ -84,13 +84,16 @@ class ReservationsService
                 const res = await updateBookCount(reservedBook[0].book_id, true)
             }
             await reservationsModel.updateOne(reservationID, {$set: updatedReservationInfo})
+            const userID = await reservationsModel.find(reservationID).select("user_id")
             updateReservationRes.success = true
             updateReservationRes.reservation_id = reservationID.reservation_id
+            updateReservationRes.user_id = userID[0].user_id
         }
         catch(err)
         {
             updateReservationRes.success = false
             updateReservationRes.reservation_id = null
+            updateReservationRes.user_id = null
             console.error(err)
         }
         return updateReservationRes
