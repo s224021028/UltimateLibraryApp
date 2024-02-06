@@ -1,4 +1,5 @@
 const services = require("../services")
+const socket = require("../socket")
 
 const reservationsService = services.reservationsService
 
@@ -10,7 +11,7 @@ class ReservationsController
         {
             if(req.session.user && !req.session.user.admin)
             {
-                const result = await reservationsService.viewUserReservations(req)
+                const result = await reservationsService.viewUserReservations(req.session.user.username)
                 res.json(result)
             }
             else
@@ -29,7 +30,7 @@ class ReservationsController
         {
             if(req.session.user && !req.session.user.admin)
             {
-                const result = await reservationsService.makeUserReservation(req)
+                const result = await reservationsService.makeUserReservation(req.session.user.username, req.body.data.book_id)
                 res.json(result)
                 if(socket.isRoom(req.session.user.username))
                     socket.sendNotification(req.session.user.username, "new_reservation", "success")
@@ -69,7 +70,7 @@ class ReservationsController
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = await reservationsService.updateAdminReservation(req)
+                const result = await reservationsService.updateAdminReservation(req.body.data.reservation_id, req.body.data.status)
                 res.json(result)
                 if(socket.isRoom(result.user_id))
                     socket.sendNotification(result.user_id, "update_reservation", "success")

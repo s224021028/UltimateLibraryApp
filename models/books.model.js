@@ -11,7 +11,5 @@ const booksSchema = new mongoose.Schema({
     description: {type: String, required: true},
     count: {type: Number, required: true}
 })
-
 const booksModel = mongoose.model("books", booksSchema)
-
 module.exports = booksModel

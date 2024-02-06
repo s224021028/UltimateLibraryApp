@@ -21,7 +21,7 @@ class BooksController
     {
         try
         {
-            const result = await booksService.viewBookInfo(req)
+            const result = await booksService.viewBookInfo(req.body.data.book_id)
             res.json(result)
         }
         catch(err)
@@ -36,7 +36,7 @@ class BooksController
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = await booksService.addBooks(req)
+                const result = await booksService.addBooks(req.body.data)
                 res.json(result)
             }
             else
@@ -55,7 +55,7 @@ class BooksController
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = await booksService.updateBookInfo(req)
+                const result = await booksService.updateBookInfo(req.body.data.book_id, req.body.data.title, req.body.data.author, req.body.data.cover, req.body.data.category, req.body.data.edition, req.body.data.language, req.body.data.description, req.body.data.count)
                 res.json(result)
             }
             else
@@ -74,7 +74,7 @@ class BooksController
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = await booksService.deleteBooks(req)
+                const result = await booksService.deleteBooks(req.body.data)
                 res.json(result)
             }
             else

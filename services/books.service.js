@@ -25,11 +25,11 @@ class BooksService
         }
     }
 
-    async viewBookInfo(req)
+    async viewBookInfo(book_ID)
     {
         try
         {
-            const bookID = {book_id: req.body.data.book_id}
+            const bookID = {book_id: book_ID}
             const bookInfo = await booksModel.findOne(bookID).exec()
             return bookInfo
         }
@@ -39,14 +39,14 @@ class BooksService
         }
     }
 
-    async addBooks(req)
+    async addBooks(data)
     {
         const addBooksRes = {success: false, book_ids: []}
         try
         {
             const booksCount = await booksModel.find({}).sort("-book_id").limit(1).select("book_id")
             var bookID = booksCount[0].book_id
-            var newBooks = req.body.data
+            var newBooks = data
             for(var i = 0;i < newBooks.length;i++)
             {
                 bookID++
@@ -65,13 +65,13 @@ class BooksService
         return addBooksRes
     }
 
-    async updateBookInfo(req)
+    async updateBookInfo(book_ID, bookTitle, bookAuthor, bookCover, bookCategory, bookEdition, bookLanguage, bookDescription, bookCount)
     {
         const updateBookRes = {success: false, book_id: null}
         try
         {
-            const bookID = {book_id: req.body.data.book_id}
-            const updatedBookInfo = {title: req.body.data.title, author: req.body.data.author, cover: req.body.data.cover, category: req.body.data.category, edition: req.body.data.edition, description: req.body.data.description, count: req.body.data.count}
+            const bookID = {book_id: book_ID}
+            const updatedBookInfo = {title: bookTitle, author: bookAuthor, cover: bookCover, category: bookCategory, edition: bookEdition, language: bookLanguage, description: bookDescription, count: bookCount}
             await booksModel.updateOne(bookID, {$set: updatedBookInfo})
             updateBookRes.success = true
             updateBookRes.book_id = bookID.book_id
@@ -85,12 +85,12 @@ class BooksService
         return updateBookRes
     }
 
-    async deleteBooks(req)
+    async deleteBooks(data)
     {
         const deleteBooksRes = {success: false, book_ids: []}
         try
         {
-            const bookIDs = req.body.data
+            const bookIDs = data
             await booksModel.deleteMany({book_id: {$in: bookIDs}})
             deleteBooksRes.success = true
             deleteBooksRes.book_ids = bookIDs
@@ -104,24 +104,24 @@ class BooksService
         return deleteBooksRes
     }
 
-    async updateBookCount(book_id, increase)
+    async updateBookCount(book_ID, increase)
     {
         try
         {
-            const bookID = {book_id: book_id}
-            var bookCount = await booksModel.find(bookID).select("count")
+            const bookID = {book_id: book_ID}
+            var bookInfo = await booksModel.findOne(bookID).exec()
             if(increase)
             {
-                bookCount[0].count++
+                bookInfo.count++
             }
             else
             {
-                if(bookCount[0].count > 0)
-                    bookCount[0].count--
+                if(bookInfo.count > 0)
+                    bookInfo.count--
                 else
                     return false
             }
-            const updatedBookCount = {count: bookCount[0].count}
+            const updatedBookCount = {count: bookInfo.count}
             await booksModel.updateOne(bookID, {$set: updatedBookCount})
         }
         catch(err)

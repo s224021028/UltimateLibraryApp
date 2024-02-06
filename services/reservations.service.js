@@ -4,11 +4,11 @@ const reservationsModel = models.reservationsModel
 
 class ReservationsService
 {
-    async viewUserReservations(req)
+    async viewUserReservations(user_ID)
     {
         try
         {
-            const userID = {user_id: req.session.user.username}
+            const userID = {user_id: user_ID}
             const userReservations = await reservationsModel.find(userID)
             return userReservations
         }
@@ -18,14 +18,12 @@ class ReservationsService
         }
     }
 
-    async makeUserReservation(req)
+    async makeUserReservation(userID, bookID)
     {
         const {updateBookCount} = require("../services").booksService
         const makeReservationRes = {success: false, reservation_id: null, book_id: null}
         try
         {
-            const userID = req.session.user.username
-            const bookID = req.body.data.book_id
             const res = await updateBookCount(bookID, false)
             if(res)
             {
@@ -67,27 +65,26 @@ class ReservationsService
         }
     }
 
-    async updateAdminReservation(req)
+    async updateAdminReservation(reservation_ID, reservationStatus)
     {
         const {updateBookCount} = require("../services").booksService
         const updateReservationRes = {success: false, reservation_id: null, user_id: null}
         try
         {
-            const reservationID = {reservation_id: req.body.data.reservation_id}
-            const reservationStatus = req.body.data.status
+            const reservationID = {reservation_id: reservation_ID}
             const updatedReservationInfo = {status: reservationStatus}
             if(reservationStatus == "Returned")
             {
                 const returnDate = Date.now()
                 updatedReservationInfo.return_date = returnDate
-                const reservedBook = await reservationsModel.find(reservationID).select("book_id")
-                const res = await updateBookCount(reservedBook[0].book_id, true)
+                const reservedBook = await reservationsModel.findOne(reservationID).exec()
+                const res = await updateBookCount(reservedBook.book_id, true)
             }
             await reservationsModel.updateOne(reservationID, {$set: updatedReservationInfo})
-            const userID = await reservationsModel.find(reservationID).select("user_id")
+            const reservationInfo = await reservationsModel.findOne(reservationID).exec()
             updateReservationRes.success = true
             updateReservationRes.reservation_id = reservationID.reservation_id
-            updateReservationRes.user_id = userID[0].user_id
+            updateReservationRes.user_id = reservationInfo.user_id
         }
         catch(err)
         {

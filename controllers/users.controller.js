@@ -8,7 +8,7 @@ class UsersController
     {
         try
         {
-            const result = await usersService.register(req)
+            const result = await usersService.register(req.body.user_id, req.body.password, req.body.name)
             res.json(result)
         }
         catch(err)
@@ -21,7 +21,7 @@ class UsersController
     {
         try
         {
-            const result = await usersService.login(req)
+            const result = await usersService.login(req.body.user_id, req.body.password)
             if(result.success == true)
             {
                 req.session.regenerate((err) => {

@@ -10,14 +10,11 @@ class UsersService
         this.#createAdmin()
     }
 
-    async register(req)
+    async register(userID, password, name)
     {
         var registerRes = {success: false, message: ""}
         try
         {
-            const userID = req.body.user_id
-            const password = req.body.password
-            const name = req.body.name
             const encryptedPassword = await this.#encryptPassword(password)
             const newUser = {user_id: userID, password: encryptedPassword, name: name}
             await usersModel.create(newUser)
@@ -37,14 +34,14 @@ class UsersService
         return registerRes
     }
 
-    async login(req)
+    async login(userID, password)
     {
         var loginRes = {success: false, message: "", id: "", isAdmin: false}
         try
         {
-            const userName = {user_id: req.body.user_id}
+            const userName = {user_id: userID}
             const loginInfo = await usersModel.findOne(userName).exec()
-            loginRes.success = await this.#decryptPassword(req.body.password, loginInfo.password)
+            loginRes.success = await this.#decryptPassword(password, loginInfo.password)
             if(loginRes.success == true)
             {
                 loginRes.message = "Login successful"
