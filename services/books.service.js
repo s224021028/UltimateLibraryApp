@@ -44,8 +44,8 @@ class BooksService
         const addBooksRes = {success: false, book_ids: []}
         try
         {
-            const booksCount = await booksModel.countDocuments({})
-            var bookID = booksCount
+            const booksCount = await booksModel.find({}).sort("-book_id").limit(1).select("book_id")
+            var bookID = booksCount[0].book_id
             var newBooks = req.body.data
             for(var i = 0;i < newBooks.length;i++)
             {
