@@ -20,6 +20,10 @@ The backend server to handle client requests of the Ultimate Library application
     npm start
     ```
     to start the server
+  - To run tests
+    ```bash
+    npm test
+    ```
   - In the browser enter http://localhost:5000
 ## Contributions
 Pull requests are welcome. For major changes, please open an issue first
