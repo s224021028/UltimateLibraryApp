@@ -10,16 +10,14 @@ The backend server to handle client requests of the Ultimate Library application
     ```bash
     git clone https://github.com/s224021028/UltimateLibraryApp-backend.git
     ```
-  - Open Terminal and run the command
+  - Open Terminal and run the command inside the project directory (This will install all the dependencies from package.json)
     ```bash
     npm install
     ```
-    inside the project directory (This will install all the dependencies from package.json)
-  - Run
+  - To start the server
     ```bash
     npm start
     ```
-    to start the server
   - To run tests
     ```bash
     npm test
