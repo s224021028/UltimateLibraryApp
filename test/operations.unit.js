@@ -28,9 +28,4 @@ describe("Operations Unit Testing", () => {
             expect(result).to.have.property("count").and.to.be.greaterThanOrEqual(0)
         })
     })
-    describe("Admin Operations", () => {
-        it("should return an array of length greater than or equal to 0", async () => {
-            
-        })
-    })
 })
