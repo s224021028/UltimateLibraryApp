@@ -35,7 +35,11 @@ class ReservationsController
                     socket.sendNotification(req.session.user.username, "new_reservation", "success")
             }
             else
+            {
                 res.json({success: false, message: "Login required"})
+                if(socket.isRoom(req.session.user.username))
+                    socket.sendNotification(req.session.user.username, "new_reservation", "success")
+            }
         }
         catch(err)
         {
@@ -73,7 +77,11 @@ class ReservationsController
                     socket.sendNotification(result.user_id, "update_reservation", "success")
             }
             else
+            {
                 res.json({success: false, message: "Unauthorized"})
+                if(socket.isRoom(result.user_id))
+                    socket.sendNotification(result.user_id, "update_reservation", "success")
+            }
         }
         catch(err)
         {

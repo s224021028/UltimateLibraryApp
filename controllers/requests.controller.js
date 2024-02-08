@@ -35,7 +35,11 @@ class RequestsController
                     socket.sendNotification(req.session.user.username, "new_request", "success")
             }
             else
+            {
                 res.json({success: false, message: "Login required"})
+                f(socket.isRoom(req.session.user.username))
+                    socket.sendNotification(req.session.user.username, "new_request", "fail")
+            }
         }
         catch(err)
         {
@@ -73,7 +77,11 @@ class RequestsController
                     socket.sendNotification(result.user_id, "update_request", "success")
             }
             else
+            {
                 res.json({success: false, message: "Unauthorized"})
+                if(socket.isRoom(result.user_id))
+                    socket.sendNotification(result.user_id, "update_request", "fail")
+            }
         }
         catch(err)
         {
