@@ -16,7 +16,6 @@ class ReservationsController
             }
             else
                 res.json({success: false, message: "Login required"})
-                //redirect to user home*/
         }
         catch(err)
         {
@@ -30,14 +29,13 @@ class ReservationsController
         {
             if(req.session.user && !req.session.user.admin)
             {
-                const result = await reservationsService.makeUserReservation(req.session.user.username, req.body.data.book_id)
+                const result = await reservationsService.makeUserReservation(req.session.user.username, req.body.book_id)
                 res.json(result)
                 if(socket.isRoom(req.session.user.username))
                     socket.sendNotification(req.session.user.username, "new_reservation", "success")
             }
             else
                 res.json({success: false, message: "Login required"})
-                //redirect to user home*/
         }
         catch(err)
         {
@@ -56,7 +54,6 @@ class ReservationsController
             }
             else
                 res.json({success: false, message: "Unauthorized"})
-                //redirect to user home*/
         }
         catch(err)
         {
@@ -77,7 +74,6 @@ class ReservationsController
             }
             else
                 res.json({success: false, message: "Unauthorized"})
-                //redirect to user home*/
         }
         catch(err)
         {

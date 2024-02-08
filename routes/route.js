@@ -8,7 +8,7 @@ const requestsController = controllers.requestsController
 const reservationsController = controllers.reservationsController
 
 router.get("/", (req, res) => {
-    res.redirect("/home")
+    res.render("index.html")
 })
 router.get("/home", (req, res) => {
     booksController.getAllBooks(req, res)

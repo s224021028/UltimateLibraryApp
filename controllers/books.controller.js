@@ -21,7 +21,7 @@ class BooksController
     {
         try
         {
-            const result = await booksService.viewBookInfo(req.body.data.book_id)
+            const result = await booksService.viewBookInfo(req.query.book_id)
             res.json(result)
         }
         catch(err)
@@ -36,12 +36,11 @@ class BooksController
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = await booksService.addBooks(req.body.data)
+                const result = await booksService.addBooks(req.body)
                 res.json(result)
             }
             else
                 res.json({success: false, message: "Uaauthorized"})
-                //redirect to user home*/
         }
         catch(err)
         {
@@ -55,12 +54,11 @@ class BooksController
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = await booksService.updateBookInfo(req.body.data.book_id, req.body.data.title, req.body.data.author, req.body.data.cover, req.body.data.category, req.body.data.edition, req.body.data.language, req.body.data.description, req.body.data.count)
+                const result = await booksService.updateBookInfo(req.body.book_id, req.body.title, req.body.author, req.body.cover, req.body.category, req.body.edition, req.body.language, req.body.description, req.body.count)
                 res.json(result)
             }
             else
                 res.json({success: false, message: "Unauthorized"})
-                //redirect to user home*/
         }
         catch(err)
         {
@@ -74,12 +72,11 @@ class BooksController
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = await booksService.deleteBooks(req.body.data)
+                const result = await booksService.deleteBooks(req.query.data)
                 res.json(result)
             }
             else
                 res.json({success: false, message: "Unauthorized"})
-                //redirect to user home*/
         }
         catch(err)
         {

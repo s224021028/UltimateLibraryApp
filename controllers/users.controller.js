@@ -21,22 +21,18 @@ class UsersController
     {
         try
         {
-            const result = await usersService.login(req.body.user_id, req.body.password)
+            const result = await usersService.login(req.query.user_id, req.query.password)
             if(result.success == true)
             {
                 req.session.regenerate((err) => {
                     if(err)
                         next(err)
                 })
-                req.session.user = {username: req.body.user_id, admin: result.isAdmin}
+                req.session.user = {username: req.query.user_id, admin: result.isAdmin}
                 req.session.save((err) => {
                     if(err)
                         next(err)
                 })
-                /*if(req.session.user.admin)
-                    redirect to admin home
-                else
-                    redirect to user home*/
             }
             res.json(result)
         }
@@ -66,7 +62,6 @@ class UsersController
             console.error(err)
         }
         res.json(logoutRes)
-        //redirect to home
     }
 }
 module.exports = new UsersController()

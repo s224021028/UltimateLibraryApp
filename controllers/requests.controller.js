@@ -16,7 +16,6 @@ class RequestsController
             }
             else
                 res.json({success: false, message: "Login required"})
-                //redirect to user home*/
         }
         catch(err)
         {
@@ -37,7 +36,6 @@ class RequestsController
             }
             else
                 res.json({success: false, message: "Login required"})
-                //redirect to user home*/
         }
         catch(err)
         {
@@ -56,7 +54,6 @@ class RequestsController
             }
             else
                 res.json({success: false, message: "Unauthorized"})
-                //redirect to user home*/
         }
         catch(err)
         {
@@ -70,14 +67,13 @@ class RequestsController
         {
             if(req.session.user && req.session.user.admin)
             {
-                const result = await requestsService.updateAdminRequest(req.body.data.request_id, req.body.data.status)
+                const result = await requestsService.updateAdminRequest(req.body.request_id, req.body.status)
                 res.json(result)
                 if(socket.isRoom(result.user_id))
                     socket.sendNotification(result.user_id, "update_request", "success")
             }
             else
                 res.json({success: false, message: "Unauthorized"})
-                //redirect to user home*/
         }
         catch(err)
         {

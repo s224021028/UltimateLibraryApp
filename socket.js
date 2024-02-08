@@ -9,7 +9,7 @@ class Socket
             console.log("Client connected")
             socket.on("disconnect", () => {
                 console.log("Client disconnected")
-            })
+            })  
             socket.on("login", (userID) => {
                 socket.join(userID)
             })
